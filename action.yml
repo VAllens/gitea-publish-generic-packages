@@ -1,0 +1,33 @@
+---
+name: gitea-publish-generic-packages
+description: "An action to support publishing generic packages to Gitea."
+author: "Allen.Cai"
+inputs:
+  api_url:
+    description: "The base gitea API url. Defaults to github.api_url"
+    required: false
+    default: ${{ github.api_url }}
+  owner:
+    description: "Assign an owner to this generic package. Defaults to github.repository_owner"
+    required: false
+    default: ${{ github.repository_owner }}
+  package_name:
+    description: "Gives the generic package a custom name. Defaults to github.event.repository.name"
+    required: false
+    default: ${{ github.event.repository.name }}
+  package_version:
+    description: "Gives a generic package version. Defaults to github.ref_name"
+    required: false
+    default: ${{ github.ref_name }}
+  files:
+    description: "Newline-delimited list of path globs for generic package files to upload"
+    required: true
+  token:
+    description: "The Gitea personal access token"
+    required: true
+runs:
+  using: "node16"
+  main: "dist/index.js"
+branding:
+  color: "green"
+  icon: "package"
